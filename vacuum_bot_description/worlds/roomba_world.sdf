@@ -1,0 +1,135 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="default">
+    <!-- SYSTEM PLUGINS -->
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- LIGHTING -->
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 12 0 0 0</pose>
+      <diffuse>0.95 0.95 0.95 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- GROUND PLANE (Light Warm Tile Texture Finish) -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>16 16</size></plane></geometry>
+          <material>
+            <ambient>0.9 0.85 0.8 1</ambient>
+            <diffuse>0.9 0.85 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- OUTER HOUSE BOUNDARY WALLS (Cream White Finish) -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 6.0 0.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>12.0 0.15 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>12.0 0.15 1.0</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link>
+    </model>
+
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -6.0 0.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>12.0 0.15 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>12.0 0.15 1.0</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link>
+    </model>
+
+    <model name="wall_east">
+      <static>true</static>
+      <pose>6.0 0 0.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>0.15 12.0 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>0.15 12.0 1.0</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link>
+    </model>
+
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-6.0 0 0.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>0.15 12.0 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>0.15 12.0 1.0</size></box></geometry><material><ambient>0.9 0.9 0.85 1</ambient><diffuse>0.9 0.9 0.85 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- ROOM DIVIDERS & CORRIDOR DOORS -->
+    <!-- Bedroom Partition with Doorway Pass -->
+    <model name="bedroom_wall">
+      <static>true</static>
+      <pose>-2.0 2.5 0.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>4.5 0.15 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>4.5 0.15 1.0</size></box></geometry><material><ambient>0.4 0.4 0.45 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- Kitchen Divider Wall -->
+    <model name="kitchen_wall">
+      <static>true</static>
+      <pose>2.5 -2.0 0.5 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>0.15 4.5 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>0.15 4.5 1.0</size></box></geometry><material><ambient>0.4 0.4 0.45 1</ambient><diffuse>0.4 0.4 0.45 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- LIVING ROOM FURNITURE -->
+    <!-- Modern TV Unit & Console -->
+    <model name="tv_unit">
+      <static>true</static>
+      <pose>5.2 1.5 0.35 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>0.5 2.2 0.7</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>0.5 2.2 0.7</size></box></geometry><material><ambient>0.15 0.15 0.15 1</ambient><diffuse>0.15 0.15 0.15 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- Living Room Sofa (Dark Blue Cushion) -->
+    <model name="living_sofa">
+      <static>true</static>
+      <pose>2.0 2.0 0.3 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>1.8 0.8 0.6</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.8 0.8 0.6</size></box></geometry><material><ambient>0.1 0.25 0.5 1</ambient><diffuse>0.1 0.25 0.5 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- Coffee Table (Teak Finish) -->
+    <model name="coffee_table">
+      <static>true</static>
+      <pose>2.0 0.5 0.2 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>1.0 0.6 0.4</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.0 0.6 0.4</size></box></geometry><material><ambient>0.45 0.25 0.1 1</ambient><diffuse>0.45 0.25 0.1 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- BEDROOM SETUP -->
+    <!-- King Size Bed Structure -->
+    <model name="bed">
+      <static>true</static>
+      <pose>-3.5 4.0 0.3 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>2.0 1.8 0.5</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>2.0 1.8 0.5</size></box></geometry><material><ambient>0.7 0.2 0.2 1</ambient><diffuse>0.7 0.2 0.2 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- KITCHEN ISLAND / COUNTER -->
+    <model name="kitchen_counter">
+      <static>true</static>
+      <pose>-3.5 -3.5 0.45 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><box><size>1.2 2.8 0.9</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.2 2.8 0.9</size></box></geometry><material><ambient>0.1 0.5 0.4 1</ambient><diffuse>0.1 0.5 0.4 1</diffuse></material></visual></link>
+    </model>
+
+    <!-- SMALL OBSTACLES (Dustbin & Stool) -->
+    <model name="dustbin">
+      <static>true</static>
+      <pose>-0.5 -1.5 0.25 0 0 0</pose>
+      <link name="l"><collision name="c"><geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry></collision>
+      <visual name="v"><geometry><cylinder><radius>0.2</radius><length>0.5</length></cylinder></geometry><material><ambient>0.8 0.7 0.1 1</ambient><diffuse>0.8 0.7 0.1 1</diffuse></material></visual></link>
+    </model>
+
+  </world>
+</sdf>
